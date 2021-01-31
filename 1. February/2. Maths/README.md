@@ -1,5 +1,4 @@
-                        A. Calculus
-                          ---------
+# A. Calculus
 
 1. Functions of a single/multiple variable, limit, continuity,
     differentiability, and partial derivatives;
@@ -12,12 +11,13 @@
 
 5. A lot Of Practices !!!
 
+```markdown
 ==> Resources:
         --> Youtube
         --> Book: Ask David
+```
 
-                    B. Linear Algebra
-                       --------------
+# B. Linear Algebra
 
 1. Scalar Multiplication, Linear transformation, transpose,
     conjugate, rank, determinant;
@@ -33,13 +33,13 @@
 
 6. A lot Of Practices !!!
 
+```markdown
 ==> Resources:
         --> Youtube
-        --> Book: Linear Algebra and Its Applications
-                                    "5th - David C Lay"
+        --> Book: Linear Algebra and Its Applications 5th - David C Lay"
+```
 
-                C. Probability and Statistics
-                  ---------------------------
+# C. Probability and Statistics
 
 1. Data Summaries and descriptive statistics, central tendecy, variance,
     covarience, correlation;
@@ -57,8 +57,10 @@
 
 7 A lot Of Practices !!!
 
+```markdown
 ==> Resources:
         --> Youtube
         --> Books:
                 * A First Course in Probability, 8th - Sheldon M Ross
                 * Practical Statistics for Data Scientists
+```
