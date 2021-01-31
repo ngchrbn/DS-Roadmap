@@ -8,7 +8,7 @@ It is divided into months:
 
 ## From February To December
 
-[1. February](https://github.com/ngchrbn/DS-Roadmap/blob/main/1.%20February/1.%20Python%20Review/README.md)
+[1. February](https://github.com/ngchrbn/DS-Roadmap/blob/27fdea0c5b634b6619fa1fd1613f5f42b9172484/1.%20February/README.md)
 
 [2. March](https://github.com/ngchrbn/DS-Roadmap/blob/main/2.%20March/README.md)
 
