@@ -6,7 +6,7 @@ My goal(Objective) is to be an employable data scientist by the end of 2021.
 
 <p align="center">
   <a href="#">
-    <img src="https://github.com/ngchrbn/DS-Roadmap/blob/main/img/DS-Roadmap.png" alt="Data Science Roadmap" width="72" height="72">
+    <img src="https://github.com/ngchrbn/DS-Roadmap/blob/main/img/DS-Roadmap.png" alt="Data Science Roadmap" width="450" height="250">
   </a>
 </p>
 
