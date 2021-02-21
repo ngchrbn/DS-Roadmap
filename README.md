@@ -4,32 +4,32 @@ This is a roadmap for my data science learning journey.
 
 My goal(Objective) is to be an employable data scientist by the end of 2021.
 
+<p align="center">
+  <a href="#">
+    <img src="https://github.com/ngchrbn/DS-Roadmap/blob/main/img/DS-Roadmap.png" alt="Data Science Roadmap" width="72" height="72">
+  </a>
+</p>
+
 It is divided into months:
 
 ## From February To December
 
-[1. February](https://github.com/ngchrbn/DS-Roadmap/blob/27fdea0c5b634b6619fa1fd1613f5f42b9172484/1.%20February/README.md)
+[1. Programming or Software Engineering](https://github.com/ngchrbn/DS-Roadmap/blob/main/1.%20Programming/README.md) (February and March)
 
-[2. March](https://github.com/ngchrbn/DS-Roadmap/blob/main/2.%20March/README.md)
+[2. Data Collection and Wrangling](https://github.com/ngchrbn/DS-Roadmap/blob/main/2.%20Data%20Collection%20and%20Wrangling/README.md) (April and May)
 
-[3. April](https://github.com/ngchrbn/DS-Roadmap/blob/main/3.%20April/README.md)
+[3. Exploratory Data Analysis, Business Acumen, and Storytelling](https://github.com/ngchrbn/DS-Roadmap/blob/main/3.%20Exploratory%20Data%20Analysis%20and%20Storytelling/README.md) (June and July)
 
-[4. May](https://github.com/ngchrbn/DS-Roadmap/blob/main/4.%20May/README.md)
+[4. Statistics and Mathematics](https://github.com/ngchrbn/DS-Roadmap/blob/main/4.%20Statistics%20and%20Mathematics/README.md) (August)
 
-[5. June](https://github.com/ngchrbn/DS-Roadmap/blob/main/5.%20June/README.md)
+[5. Machine Learning and A.I](https://github.com/ngchrbn/DS-Roadmap/blob/main/5.%20Machine%20Learning%20and%20A.I/README.md) (September, October,and November)
 
-[6. July](https://github.com/ngchrbn/DS-Roadmap/blob/main/6.%20July/README.md)
+[6. Final Project](https://github.com/ngchrbn/DS-Roadmap/blob/main/6.%20Final%20Project/README.md) (December)
 
-[7. August](https://github.com/ngchrbn/DS-Roadmap/blob/main/7.%20August/README.md)
 
-[8. September](https://github.com/ngchrbn/DS-Roadmap/blob/main/8.%20September/README.md)
+Roadmap taken from [this post](https://www.freecodecamp.org/news/data-science-learning-roadmap/amp/) on FCC by [Harshit Tyagi](https://www.freecodecamp.org/news/author/harshit/)
 
-[9. October](https://github.com/ngchrbn/DS-Roadmap/blob/main/9.%20October/README.md)
 
-[10. November](https://github.com/ngchrbn/DS-Roadmap/blob/main/10.%20November/README.md)
-
-[11. December](https://github.com/ngchrbn/DS-Roadmap/blob/main/11.%20December/README.md)
-
-```markdown
-⚠ It will be updated with resources I will be using.
+```text
+The duration for mathematics and statistics will be modified if needed to be 2 months and change ML&AI's duration to 2 months❗
 ```
