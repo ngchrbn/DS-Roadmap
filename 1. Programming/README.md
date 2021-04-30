@@ -58,6 +58,4 @@ Duration: 2 months (February and March) including a project
 ## D. Projects Ideas
 
 - Solve a lot of problem here: [HackerRank](https://www.hackerrank.com/)(beginner-friendly) and [LeetCode](https://leetcode.com/)(solve easy or medium-level questions)
-- Data extraction from a website/API endpoints- try to write Python Scripts from extracting that allow scraping like soundcloud.com and Store the extracted data into a CSV file or a SQL database.
 
-- Simple web apps like a Youtube video downloader, website blocker, music player, plagiarism checker,...

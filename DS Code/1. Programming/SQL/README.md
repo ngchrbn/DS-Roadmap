@@ -53,7 +53,6 @@ ALTER TABLE people RENAME TO person;
 ```sql
 ALTER TABLE table_name CHANGE COLUMN col_name new_col_name VARCHAR(30);
 ```
-==> You substitute the names and the type with what you want!
 
 ==> You can change as many column (existing in the table) you want in the same sentence
 
@@ -63,4 +62,33 @@ ALTER TABLE table_name CHANGE COLUMN col_name new_col_name VARCHAR(30);
 ```sql
 ALTER TABLE table_name MODIFY COLUMN col_name VARCHAR(30);
 ```
+==> You substitute the names and the type with what you want!
 
+### 7. Drop a Column
+```sql
+ALTER TABLE table_name DROP COLUMN col_name;
+```
+==> Once you drop a column, everything that was stored in it is removed too! 
+
+### 8. Retrieve data from a Table
+
+Option 1
+```sql
+SELECT * FROM table_name;
+```
+Option 2
+```sql
+SELECT col1, col2, col3,..., colN FROM table_name;
+```
+Option 3
+```sql
+SELECT col1, col2, col3,..., colN FROM table_name WHERE condtion;
+```
+
+### 9. Modify a Column
+```sql
+UPDATE table_name SET col_name = data;
+```
+==> This will loop over every row in the column to change the data
+
+==> If you want for a specific row(s), you add the WHERE clause 
