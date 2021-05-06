@@ -21,7 +21,7 @@ Duration: 2 months (April and May) including a project
 - [Kaggle pandas tutorial](https://www.kaggle.com/learn/pandas)
 - [Data cleaning course by Kaggle](https://www.kaggle.com/learn/data-cleaning)
 - [FCC Course on Numpy, Pandas, matplotlib and seaborn](https://www.youtube.com/watch?v=r-uOLxNrNk8)
-
+- [Python for Data Analysis Book(Main Resource)](https://www.oreilly.com/library/view/python-for-data/9781491957653/)
 ## C. Project Ideas
 
 - Collect data from a website/API (open for public consumption) of your choice, and transform the data to store it from different sources into an aggregated file or table (DB). Example APIs include [TMDB](https://developers.themoviedb.org/3), [quandl](https://www.quandl.com/tools/python), [Twitter API](https://developer.twitter.com/en/docs), and so on.
