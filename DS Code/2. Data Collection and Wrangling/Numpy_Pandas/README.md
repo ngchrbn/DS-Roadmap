@@ -672,3 +672,264 @@ operators >, >=, <, <=, ==, != );
 & |, ^ );
 
 ### 3. Array-Oriented Programming with Arrays
+
+- Using NumPy arrays enables you to express many kinds of data processing tasks as
+  concise array expressions that might otherwise require writing loops. This practice of
+  replacing explicit loops with array expressions is commonly referred to as vectorization.
+- In general, vectorized array operations will often be one or two (or more) orders
+   of magnitude faster than their pure Python equivalents, with the biggest impact in
+   any kind of numerical computations.
+- As a simple example, suppose we wished to evaluate the function sqrt(x^2 + y^2)
+  across a regular grid of values. The **np.meshgrid** function takes two 1D arrays and
+  produces two 2D matrices corresponding to all pairs of (x, y) in the two arrays:
+  
+```python
+    In [86]: points = np.arange(-5, 5, 0.01) # 1000 equally spaced points
+    
+    In [87]: xs, ys = np.meshgrid(points, points)
+    
+    In [88]: ys
+    Out [88]:
+    array([[-5. , -5. , -5. , ..., -5. , -5. , -5. ],
+            [-4.99, -4.99, -4.99, ..., -4.99, -4.99, -4.99],
+            [-4.98, -4.98, -4.98, ..., -4.98, -4.98, -4.98],
+            ...,
+            [ 4.97, 4.97, 4.97, ..., 4.97, 4.97, 4.97],
+            [ 4.98, 4.98, 4.98, ..., 4.98, 4.98, 4.98],
+            [ 4.99, 4.99, 4.99, ..., 4.99, 4.99, 4.99]])
+```
+
+- Now, evaluating the function is a matter of writing the same expression you would
+  write with two points:
+  
+```python
+    In [89]: z = np.sqrt(xs ** 2 + ys ** 2)
+    
+    In [90]: z
+    Out [90]:
+    array([[ 7.0711, 7.064 , 7.0569, ..., 7.0499, 7.0569, 7.064 ],
+            [ 7.064 , 7.0569, 7.0499, ..., 7.0428, 7.0499, 7.0569],
+            [ 7.0569, 7.0499, 7.0428, ..., 7.0357, 7.0428, 7.0499],
+            ...,
+            [ 7.0499, 7.0428, 7.0357, ..., 7.0286, 7.0357, 7.0428],
+            [ 7.0569, 7.0499, 7.0428, ..., 7.0357, 7.0428, 7.0499],
+            [ 7.064 , 7.0569, 7.0499, ..., 7.0428, 7.0499, 7.0569]])
+```
+
+#### Expressing Conditional Logic as Array Operations
+
+- The **numpy.where** function is a vectorized version of the ternary expression _x if con
+  dition else y_.
+  
+-  Suppose we had a boolean array and two arrays of values:
+
+```python
+    In [90]: xarr = np.array([1.1, 1.2, 1.3, 1.4, 1.5])
+    
+    In [91]: yarr = np.array([2.1, 2.2, 2.3, 2.4, 2.5])
+    
+    In [92]:  cond = np.array([True, False, True, True, False])
+    
+    In [93]: result = np.where(cond, xarr, yarr)
+    
+    In [94]: result
+    Out [94]: array([ 1.1, 2.2, 1.3, 1.4, 2.5])
+```
+
+- The second and third arguments to np.where don’t need to be arrays; one or both of
+  them can be scalars.
+  
+- A typical use of where in data analysis is to produce a new array
+  of values based on another array
+  
+-  Suppose you had a matrix of randomly generated
+   data and you wanted to replace all positive values with 2 and all negative values with
+   –2. This is very easy to do with np.where:
+   
+```python
+    In [95]: arr = np.random.randn(4, 4)
+    
+    In [96]: arr
+    Out [96]:
+    array([[-0.5031, -0.6223, -0.9212, -0.7262],
+            [ 0.2229, 0.0513, -1.1577, 0.8167],
+            [ 0.4336, 1.0107, 1.8249, -0.9975],
+            [ 0.8506, -0.1316, 0.9124, 0.1882]])
+            
+    In [97]: arr > 0
+    Out [97]:
+    array([[False, False, False, False],
+            [ True, True, False, True],
+            [ True, True, True, False],
+            [ True, False, True, True]], dtype=bool)
+    
+    In [98]: np.where(arr >0, 2, -2)
+    Out [98]:
+    array([[-2, -2, -2, -2],
+            [ 2, 2, -2, 2],
+            [ 2, 2, 2, -2],
+            [ 2, -2, 2, 2]])
+```
+
+- You can combine scalars and arrays when using np.where. For example, I can replace
+  all positive values in arr with the constant 2 like so:
+  
+```python
+    In [99]: np.where(arr > 0, 2, arr) # set only positive values to 2
+    Out [99]:
+    array([[-0.5031, -0.6223, -0.9212, -0.7262],
+            [ 2. , 2. , -1.1577, 2. ],
+            [ 2. , 2. , 2. , -0.9975],
+            [ 2. , -0.1316, 2. , 2. ]])
+```
+
+- The arrays passed to np.where can be more than just equal-sized arrays or scalars.
+
+#### Mathematical and Statistical Methods
+
+- The arrays passed to np.where can be more than just equal-sized arrays or scalars.
+-  You can use aggregations (often called **_reductions_**) like **sum**, **mean**, and **std** (standard deviation) either by
+   calling the array instance method or using the top-level NumPy function.
+- Here I generate some normally distributed random data and compute some aggregate
+  statistics:
+  
+```python
+    In [100]: arr = np.random.randn(5, 4)
+    
+    In [101]: arr
+    Out [101]:
+    array([[ 2.1695, -0.1149, 2.0037, 0.0296],
+            [ 0.7953, 0.1181, -0.7485, 0.585 ],
+            [ 0.1527, -1.5657, -0.5625, -0.0327],
+            [-0.929 , -0.4826, -0.0363, 1.0954],
+            [ 0.9809, -0.5895, 1.5817, -0.5287]])
+            
+    In [102]: arr.mean()
+    Out [102]:  0.19607051119998253
+    
+    In [103]: np.mean(arr)
+    Out [103]: 0.19607051119998253
+    
+    In [104]: arr.sum()
+    Out [104]:  3.9214102239996507
+```
+
+- Functions like mean and sum take an optional axis argument that computes the statis‐
+  tic over the given axis, resulting in an array with one fewer dimension:
+  
+```python
+    In [105]: arr.mean(axis=1)
+    Out [105]: array([ 1.022 , 0.1875, -0.502 , -0.0881, 0.3611])
+    
+    In [106]: arr.sum(axis=0)
+    Out [106]: array([ 3.1693, -2.6345, 2.2381, 1.1486])
+```
+
+- Here, arr.mean(1) means “**compute mean across the columns**” where arr.sum(0)
+  means “**compute sum down the rows.**”
+- Other methods like **cumsum** and **cumprod** do not _aggregate_, instead producing an array
+  of the intermediate results:
+  
+```python
+    In [107]: arr = np.array([0, 1, 2, 3, 4, 5, 6, 7])
+    
+    In [108]: arr.cumsum()
+    Out [108]: array([ 0, 1, 3, 6, 10, 15, 21, 28])
+```
+
+- In multidimensional arrays, accumulation functions like cumsum return an array of
+  the same size, but with the partial aggregates computed along the indicated axis
+  according to each lower dimensional slice:
+  
+```python
+    In [109]: arr = np.array([[0, 1, 2], [3, 4, 5], [6, 7, 8]])
+    
+    In [110]: arr
+    Out [110]:
+    array([[0, 1, 2],
+            [3, 4, 5],
+            [6, 7, 8]])
+            
+    In [111]: arr.cumsum(axis=0)
+    Out [111]:
+    array([[ 0, 1, 2],
+            [ 3, 5, 7],
+            [ 9, 12, 15]])
+    
+    In [112]: arr.cumprod(axis=1)
+    Out [112]:
+    array([[ 0, 0, 0],
+            [ 3, 12, 60],
+            [ 6, 42, 336]])
+```
+
+##### Basic array statistical methods
+
+- **sum**: Sum of all the elements in the array or along an axis; zero-length arrays have sum 0
+- **mean**: Arithmetic mean; zero-length arrays have NaN mean
+- **std, var**: Standard deviation and variance, respectively, with optional degrees of freedom adjustment (default
+  denominator n)
+- **min, max**: Minimum and maximum
+- **argmin, argmax**: Indices of minimum and maximum elements, respectively
+- **cumsum**: Cumulative sum of elements starting from 0
+- **cumprod**: Cumulative product of elements starting from 1
+
+#### Methods for Boolean Arrays
+
+- Boolean values are coerced to 1 (True) and 0 (False) in the preceding methods. Thus,
+  sum is often used as a means of counting True values in a boolean array:
+  
+```python
+    In [113]: arr = np.random.randn(100)
+    
+    In [114]:  (arr > 0).sum() # Number of positive values
+    Out [114]: 42
+```
+
+- There are two additional methods, **any** and **all**, useful especially for boolean arrays.
+  any _tests whether one or more values in an array is True_, while all _checks if every
+  value is True_:
+  
+```python
+    In [115]: bools = np.array([False, False, True, False])
+    
+    In [116]: bools.any()
+    Out [116]: True
+    
+    In [117]: bools.all()
+    Out [117]: False
+```
+
+- These methods also work with non-boolean arrays, where non-zero elements evalu‐
+  ate to **True**.
+  
+#### Sorting
+
+- Like Python’s built-in list type, NumPy arrays can be sorted in-place with the **sort**
+  method.
+- You can sort each one-dimensional section of values in a multidimensional array in place along an axis by passing the axis number to sort
+- The top-level method np.sort returns a sorted copy of an array instead of modifying
+  the array in-place.
+  
+#### Unique and Other Set Logic
+
+- NumPy has some basic set operations for one-dimensional ndarrays. A commonly
+  used one is **np.unique**, which _returns the sorted unique values in an array_
+  
+```python
+    In [118]: names = np.array(['Bob', 'Joe', 'Will', 'Bob', 'Will', 'Joe', 'Joe'])
+    
+    In [119]: np.unique(names)
+    Out [119]:
+    array(['Bob', 'Joe', 'Will'],
+            dtype='<U4') 
+```
+
+##### Array set operations
+
+- **unique(x)**: Compute the sorted, unique elements in x
+- **intersect1d(x, y)**: Compute the sorted, common elements in x and y
+- **union1d(x, y)**: Compute the sorted union of elements
+- **in1d(x, y)**: Compute a boolean array indicating whether each element of x is contained in y
+- **setdiff1d(x, y)**: Set difference, elements in x that are not in y
+- **setxor1d(x, y)**: Set symmetric differences; elements that are in either of the arrays, but not both
