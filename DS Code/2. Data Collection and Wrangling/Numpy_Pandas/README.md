@@ -684,36 +684,36 @@ operators >, >=, <, <=, ==, != );
   produces two 2D matrices corresponding to all pairs of (x, y) in the two arrays:
   
 ```python
-    In [86]: points = np.arange(-5, 5, 0.01) # 1000 equally spaced points
-    
-    In [87]: xs, ys = np.meshgrid(points, points)
-    
-    In [88]: ys
-    Out [88]:
-    array([[-5. , -5. , -5. , ..., -5. , -5. , -5. ],
-            [-4.99, -4.99, -4.99, ..., -4.99, -4.99, -4.99],
-            [-4.98, -4.98, -4.98, ..., -4.98, -4.98, -4.98],
-            ...,
-            [ 4.97, 4.97, 4.97, ..., 4.97, 4.97, 4.97],
-            [ 4.98, 4.98, 4.98, ..., 4.98, 4.98, 4.98],
-            [ 4.99, 4.99, 4.99, ..., 4.99, 4.99, 4.99]])
+  In [86]: points = np.arange(-5, 5, 0.01) # 1000 equally spaced points
+  
+  In [87]: xs, ys = np.meshgrid(points, points)
+  
+  In [88]: ys
+  Out [88]:
+  array([[-5. , -5. , -5. , ..., -5. , -5. , -5. ],
+        [-4.99, -4.99, -4.99, ..., -4.99, -4.99, -4.99],
+        [-4.98, -4.98, -4.98, ..., -4.98, -4.98, -4.98],
+        ...,
+        [ 4.97, 4.97, 4.97, ..., 4.97, 4.97, 4.97],
+        [ 4.98, 4.98, 4.98, ..., 4.98, 4.98, 4.98],
+        [ 4.99, 4.99, 4.99, ..., 4.99, 4.99, 4.99]])
 ```
 
 - Now, evaluating the function is a matter of writing the same expression you would
   write with two points:
   
 ```python
-    In [89]: z = np.sqrt(xs ** 2 + ys ** 2)
-    
-    In [90]: z
-    Out [90]:
-    array([[ 7.0711, 7.064 , 7.0569, ..., 7.0499, 7.0569, 7.064 ],
-            [ 7.064 , 7.0569, 7.0499, ..., 7.0428, 7.0499, 7.0569],
-            [ 7.0569, 7.0499, 7.0428, ..., 7.0357, 7.0428, 7.0499],
-            ...,
-            [ 7.0499, 7.0428, 7.0357, ..., 7.0286, 7.0357, 7.0428],
-            [ 7.0569, 7.0499, 7.0428, ..., 7.0357, 7.0428, 7.0499],
-            [ 7.064 , 7.0569, 7.0499, ..., 7.0428, 7.0499, 7.0569]])
+  In [89]: z = np.sqrt(xs ** 2 + ys ** 2)
+  
+  In [90]: z
+  Out [90]:
+  array([[ 7.0711, 7.064 , 7.0569, ..., 7.0499, 7.0569, 7.064 ],
+          [ 7.064 , 7.0569, 7.0499, ..., 7.0428, 7.0499, 7.0569],
+          [ 7.0569, 7.0499, 7.0428, ..., 7.0357, 7.0428, 7.0499],
+          ...,
+          [ 7.0499, 7.0428, 7.0357, ..., 7.0286, 7.0357, 7.0428],
+          [ 7.0569, 7.0499, 7.0428, ..., 7.0357, 7.0428, 7.0499],
+          [ 7.064 , 7.0569, 7.0499, ..., 7.0428, 7.0499, 7.0569]])
 ```
 
 #### Expressing Conditional Logic as Array Operations
@@ -721,66 +721,64 @@ operators >, >=, <, <=, ==, != );
 - The **numpy.where** function is a vectorized version of the ternary expression _x if con
   dition else y_.
   
--  Suppose we had a boolean array and two arrays of values:
+- Suppose we had a boolean array and two arrays of values:
 
 ```python
-    In [90]: xarr = np.array([1.1, 1.2, 1.3, 1.4, 1.5])
-    
-    In [91]: yarr = np.array([2.1, 2.2, 2.3, 2.4, 2.5])
-    
-    In [92]:  cond = np.array([True, False, True, True, False])
-    
-    In [93]: result = np.where(cond, xarr, yarr)
-    
-    In [94]: result
-    Out [94]: array([ 1.1, 2.2, 1.3, 1.4, 2.5])
+  In [90]: xarr = np.array([1.1, 1.2, 1.3, 1.4, 1.5])
+  
+  In [91]: yarr = np.array([2.1, 2.2, 2.3, 2.4, 2.5])
+  
+  In [92]:  cond = np.array([True, False, True, True, False])
+  
+  In [93]: result = np.where(cond, xarr, yarr)
+  
+  In [94]: result
+  Out [94]: array([ 1.1, 2.2, 1.3, 1.4, 2.5])
 ```
 
 - The second and third arguments to np.where don’t need to be arrays; one or both of
   them can be scalars.
-  
 - A typical use of where in data analysis is to produce a new array
-  of values based on another array
-  
--  Suppose you had a matrix of randomly generated
-   data and you wanted to replace all positive values with 2 and all negative values with
-   –2. This is very easy to do with np.where:
-   
+  of values based on another array.
+- Suppose you had a matrix of randomly generated
+  data and you wanted to replace all positive values with 2 and all negative values with
+  –2. This is very easy to do with np.where:
+
 ```python
-    In [95]: arr = np.random.randn(4, 4)
-    
-    In [96]: arr
-    Out [96]:
-    array([[-0.5031, -0.6223, -0.9212, -0.7262],
-            [ 0.2229, 0.0513, -1.1577, 0.8167],
-            [ 0.4336, 1.0107, 1.8249, -0.9975],
-            [ 0.8506, -0.1316, 0.9124, 0.1882]])
-            
-    In [97]: arr > 0
-    Out [97]:
-    array([[False, False, False, False],
-            [ True, True, False, True],
-            [ True, True, True, False],
-            [ True, False, True, True]], dtype=bool)
-    
-    In [98]: np.where(arr >0, 2, -2)
-    Out [98]:
-    array([[-2, -2, -2, -2],
-            [ 2, 2, -2, 2],
-            [ 2, 2, 2, -2],
-            [ 2, -2, 2, 2]])
+  In [95]: arr = np.random.randn(4, 4)
+  
+  In [96]: arr
+  Out [96]:
+  array([[-0.5031, -0.6223, -0.9212, -0.7262],
+          [ 0.2229, 0.0513, -1.1577, 0.8167],
+          [ 0.4336, 1.0107, 1.8249, -0.9975],
+          [ 0.8506, -0.1316, 0.9124, 0.1882]])
+          
+  In [97]: arr > 0
+  Out [97]:
+  array([[False, False, False, False],
+          [ True, True, False, True],
+          [ True, True, True, False],
+          [ True, False, True, True]], dtype=bool)
+  
+  In [98]: np.where(arr >0, 2, -2)
+  Out [98]:
+  array([[-2, -2, -2, -2],
+          [ 2, 2, -2, 2],
+          [ 2, 2, 2, -2],
+          [ 2, -2, 2, 2]])
 ```
 
 - You can combine scalars and arrays when using np.where. For example, I can replace
   all positive values in arr with the constant 2 like so:
   
 ```python
-    In [99]: np.where(arr > 0, 2, arr) # set only positive values to 2
-    Out [99]:
-    array([[-0.5031, -0.6223, -0.9212, -0.7262],
-            [ 2. , 2. , -1.1577, 2. ],
-            [ 2. , 2. , 2. , -0.9975],
-            [ 2. , -0.1316, 2. , 2. ]])
+  In [99]: np.where(arr > 0, 2, arr) # set only positive values to 2
+  Out [99]:
+  array([[-0.5031, -0.6223, -0.9212, -0.7262],
+          [ 2. , 2. , -1.1577, 2. ],
+          [ 2. , 2. , 2. , -0.9975],
+          [ 2. , -0.1316, 2. , 2. ]])
 ```
 
 - The arrays passed to np.where can be more than just equal-sized arrays or scalars.
@@ -788,41 +786,41 @@ operators >, >=, <, <=, ==, != );
 #### Mathematical and Statistical Methods
 
 - The arrays passed to np.where can be more than just equal-sized arrays or scalars.
--  You can use aggregations (often called **_reductions_**) like **sum**, **mean**, and **std** (standard deviation) either by
+- You can use aggregations (often called **_reductions_**) like **sum**, **mean**, and **std** (standard deviation) either by
    calling the array instance method or using the top-level NumPy function.
 - Here I generate some normally distributed random data and compute some aggregate
   statistics:
   
 ```python
-    In [100]: arr = np.random.randn(5, 4)
-    
-    In [101]: arr
-    Out [101]:
-    array([[ 2.1695, -0.1149, 2.0037, 0.0296],
-            [ 0.7953, 0.1181, -0.7485, 0.585 ],
-            [ 0.1527, -1.5657, -0.5625, -0.0327],
-            [-0.929 , -0.4826, -0.0363, 1.0954],
-            [ 0.9809, -0.5895, 1.5817, -0.5287]])
-            
-    In [102]: arr.mean()
-    Out [102]:  0.19607051119998253
-    
-    In [103]: np.mean(arr)
-    Out [103]: 0.19607051119998253
-    
-    In [104]: arr.sum()
-    Out [104]:  3.9214102239996507
+  In [100]: arr = np.random.randn(5, 4)
+  
+  In [101]: arr
+  Out [101]:
+  array([[ 2.1695, -0.1149, 2.0037, 0.0296],
+          [ 0.7953, 0.1181, -0.7485, 0.585 ],
+          [ 0.1527, -1.5657, -0.5625, -0.0327],
+          [-0.929 , -0.4826, -0.0363, 1.0954],
+          [ 0.9809, -0.5895, 1.5817, -0.5287]])
+          
+  In [102]: arr.mean()
+  Out [102]:  0.19607051119998253
+  
+  In [103]: np.mean(arr)
+  Out [103]: 0.19607051119998253
+  
+  In [104]: arr.sum()
+  Out [104]:  3.9214102239996507
 ```
 
 - Functions like mean and sum take an optional axis argument that computes the statis‐
   tic over the given axis, resulting in an array with one fewer dimension:
   
 ```python
-    In [105]: arr.mean(axis=1)
-    Out [105]: array([ 1.022 , 0.1875, -0.502 , -0.0881, 0.3611])
-    
-    In [106]: arr.sum(axis=0)
-    Out [106]: array([ 3.1693, -2.6345, 2.2381, 1.1486])
+  In [105]: arr.mean(axis=1)
+  Out [105]: array([ 1.022 , 0.1875, -0.502 , -0.0881, 0.3611])
+  
+  In [106]: arr.sum(axis=0)
+  Out [106]: array([ 3.1693, -2.6345, 2.2381, 1.1486])
 ```
 
 - Here, arr.mean(1) means “**compute mean across the columns**” where arr.sum(0)
@@ -831,10 +829,10 @@ operators >, >=, <, <=, ==, != );
   of the intermediate results:
   
 ```python
-    In [107]: arr = np.array([0, 1, 2, 3, 4, 5, 6, 7])
-    
-    In [108]: arr.cumsum()
-    Out [108]: array([ 0, 1, 3, 6, 10, 15, 21, 28])
+  In [107]: arr = np.array([0, 1, 2, 3, 4, 5, 6, 7])
+  
+  In [108]: arr.cumsum()
+  Out [108]: array([ 0, 1, 3, 6, 10, 15, 21, 28])
 ```
 
 - In multidimensional arrays, accumulation functions like cumsum return an array of
@@ -842,25 +840,25 @@ operators >, >=, <, <=, ==, != );
   according to each lower dimensional slice:
   
 ```python
-    In [109]: arr = np.array([[0, 1, 2], [3, 4, 5], [6, 7, 8]])
+  In [109]: arr = np.array([[0, 1, 2], [3, 4, 5], [6, 7, 8]])
     
-    In [110]: arr
-    Out [110]:
-    array([[0, 1, 2],
-            [3, 4, 5],
-            [6, 7, 8]])
+  In [110]: arr
+  Out [110]:
+  array([[0, 1, 2],
+          [3, 4, 5],
+          [6, 7, 8]])
             
-    In [111]: arr.cumsum(axis=0)
-    Out [111]:
-    array([[ 0, 1, 2],
-            [ 3, 5, 7],
-            [ 9, 12, 15]])
+  In [111]: arr.cumsum(axis=0)
+  Out [111]:
+  array([[ 0, 1, 2],
+          [ 3, 5, 7],
+          [ 9, 12, 15]])
     
-    In [112]: arr.cumprod(axis=1)
-    Out [112]:
-    array([[ 0, 0, 0],
-            [ 3, 12, 60],
-            [ 6, 42, 336]])
+  In [112]: arr.cumprod(axis=1)
+  Out [112]:
+  array([[ 0, 0, 0],
+          [ 3, 12, 60],
+          [ 6, 42, 336]])
 ```
 
 ##### Basic array statistical methods
@@ -880,10 +878,10 @@ operators >, >=, <, <=, ==, != );
   sum is often used as a means of counting True values in a boolean array:
   
 ```python
-    In [113]: arr = np.random.randn(100)
+  In [113]: arr = np.random.randn(100)
     
-    In [114]:  (arr > 0).sum() # Number of positive values
-    Out [114]: 42
+  In [114]:  (arr > 0).sum() # Number of positive values
+  Out [114]: 42
 ```
 
 - There are two additional methods, **any** and **all**, useful especially for boolean arrays.
@@ -891,13 +889,13 @@ operators >, >=, <, <=, ==, != );
   value is True_:
   
 ```python
-    In [115]: bools = np.array([False, False, True, False])
-    
-    In [116]: bools.any()
-    Out [116]: True
-    
-    In [117]: bools.all()
-    Out [117]: False
+  In [115]: bools = np.array([False, False, True, False])
+  
+  In [116]: bools.any()
+  Out [116]: True
+  
+  In [117]: bools.all()
+  Out [117]: False
 ```
 
 - These methods also work with non-boolean arrays, where non-zero elements evalu‐
@@ -917,11 +915,11 @@ operators >, >=, <, <=, ==, != );
   used one is **np.unique**, which _returns the sorted unique values in an array_
   
 ```python
-    In [118]: names = np.array(['Bob', 'Joe', 'Will', 'Bob', 'Will', 'Joe', 'Joe'])
-    
-    In [119]: np.unique(names)
-    Out [119]:
-    array(['Bob', 'Joe', 'Will'],
+  In [118]: names = np.array(['Bob', 'Joe', 'Will', 'Bob', 'Will', 'Joe', 'Joe'])
+  
+  In [119]: np.unique(names)
+  Out [119]:
+  array(['Bob', 'Joe', 'Will'],
             dtype='<U4') 
 ```
 
@@ -933,3 +931,145 @@ operators >, >=, <, <=, ==, != );
 - **in1d(x, y)**: Compute a boolean array indicating whether each element of x is contained in y
 - **setdiff1d(x, y)**: Set difference, elements in x that are not in y
 - **setxor1d(x, y)**: Set symmetric differences; elements that are in either of the arrays, but not both
+
+### File Input and Output with Arrays
+
+- NumPy is able to save and load data to and from disk either in text or binary format.
+- **np.save** and **np.load** are the two workhorse functions for efficiently saving and loading array data on disk. Arrays are saved by default in an uncompressed raw binary format with file extension .npy:
+
+```python
+  In [120]: arr = np.arange(10)
+
+  In [121]: np.save('some_array', arr)
+```
+
+- If the file path does not already end in .npy, the extension will be appended. The array on disk can then be loaded with np.load:
+
+```python
+  In [122]: np.load('some_array.npy')
+  Out [122]: array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+```
+
+- If the file path does not already end in .npy, the extension will be appended. The array on disk can then be loaded with np.load :
+
+```python
+  In [123]: np.load('some_array.npy')
+  Out [123]: array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+```
+
+- You save multiple arrays in an uncompressed archive using **np.savez** and passing the arrays as keyword arguments:
+
+```python
+  In [124]: np.savez('array_archive.npz', a=arr, b=arr)
+```
+
+- When loading an .npz file, you get back a dict-like object that loads the individual arrays lazily.
+
+```python
+  In [125]: arch = np.load('array_archive.npz')
+  
+  In [126]: arch['b']
+  Out[126]: array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+```
+
+- If your data compresses well, you may wish to use **numpy.savez_compressed** instead:
+
+```python
+  In [127]: np.savez_compressed('arrays_compressed.npz', a=arr, b=arr)
+```
+
+### Linear Algrebra
+
+- Multiplying two two-dimensional arrays with * is an element-wise product instead of a matrix dot product. Thus, there is a function dot , both an array method and a function in the numpy namespace, for matrix multiplication:
+
+```python
+  In [128]: x = np.array([[1., 2., 3.], [4., 5., 6.]])
+
+  In [129]: y = np.array([[6., 23.], [-1, 7], [8, 9]])
+
+  In [130]: x
+  Out [130]:
+  array([[ 1., 2., 3.],
+          [ 4., 5., 6.]])
+
+  In [131]: y
+  Out [131]:
+  array([[ 6., 23.],
+          [-1., 7.],
+          [ 8., 9.]])
+
+  In [132]: x.dot(y) # Or np.dot(x, y)
+  Out [132]:
+  array([[ 28., 64.],
+          [ 67., 181.]])
+```
+
+- A matrix product between a two-dimensional array and a suitably sized one-dimensional array results in a one-dimensional array.
+
+- The **@** symbol (as of Python 3.5) also works as an infix operator that performs matrix multiplication:
+
+```python
+  In [133]: x @ np.ones(3)
+  Out [133]: array([ 6., 15.])
+```
+
+#### Commonly used numpy.linalg functions
+
+- **diag**: Return the diagonal (or off-diagonal) elements of a square matrix as a 1D array, or convert a 1D array into a square matrix with zeros on the off-diagonal;
+- **dot**: Matrix multiplications;
+- **trace**: Compute the sum of the diagonal elements;
+- **det**: COmpute the matrix determinant;
+- **eig**: Compute the eigenvalues and eigenvectors of a square matrix;
+- **inv**: Compute the inverse of a square matrix;
+- **pinv**: Compute the Moore-Penrose pseudo-inverse of a matrix;
+- **qr**: Compute the QR decomposition
+- **svd**: Compute the singular value decomposition (SVD)
+- **solve**: Solve the linear system Ax = b for x, where A is a square matrix;
+- **lstsq**: Compute the least-squares solution to Ax=b.
+
+### Pseudorandom Number Generation
+
+- The numpy.random module supplements the built-in Python random with functions for efficiently generating whole arrays of sample values from many kinds of probability distributions.
+
+```python
+  In [134]: samples = np.random.normal(size=(4, 4))
+
+  In [135]: samples
+  Out [135]:
+  array([[ 0.5732, 0.1933, 0.4429, 1.2796],
+          [ 0.575 , 0.4339, -0.7658, -1.237 ],
+          [-0.5367, 1.8545, -0.92 , -0.1082],
+          [ 0.1525, 0.9435, -1.0953, -0.144 ]])
+```
+
+- We say that these are **pseudorandom** numbers because they are generated by an algorithm with deterministic behavior based on the _seed_ of the random number generator.
+- You can change NumPy’s random number generation seed using **np.random.seed** :
+
+```python
+  In [136]: np.random.seed(1234)
+```
+
+- The data generation functions in **numpy.random** use a _global random seed_. To avoid global state, you can use **numpy.random.RandomState** to create a _random number generator isolated from others_:
+
+```python
+  In [137]: rng = np.random.RandomState(1234)
+
+  In [138]: rng.randn(10)
+  Out [138]:
+  array([ 0.4714, -1.191 , 1.4327, -0.3127, -0.7206, 0.8872, 0.8596, -0.6365, 0.0157, -2.2427])
+```
+
+#### Partial list of numpy.random functions
+
+- **seed**: Seed the random number generator;
+- **permutation**: Return a random permutation of a sequence, or return a permuted range;
+- **shuffle**: Randomly permute a sequence in-place;
+- **rand**: Draw samples from a uniform distribution;
+- **randint**: Draw random integers from a given low-to-high range;
+- **randn**: raw samples from a normal distribution with mean 0 and standard deviation 1 (MATLAB-like interface);
+- **binomial**: Draw samples from a binomial distribution;
+- **normal**: Draw samples from a normal (Gaussian) distribution;
+- **beta**: Draw samples from a beta distribution;
+- **chisquare**: Draw samples from a chi-square distribution;
+- **gamma**: Draw samples from a gamma distribution;
+- **uniform**: Draw samples from a uniform [0, 1) distribution.
