@@ -287,3 +287,5 @@ Method | Description
 **is_monotonic** | Returns True if each element is greater than or equal to the previous element.
 **is_unique** | Returns True if the Index has no duplicate values.
 **unique** | Compute the array of unique values in the Index.
+
+## Essential Functionality
