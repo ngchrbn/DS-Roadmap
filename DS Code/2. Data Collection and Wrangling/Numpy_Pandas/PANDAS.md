@@ -418,4 +418,90 @@ Type | Notes
 **reindex method** | Select either rows or columns by labels.
 **get_value, set_value methods** | Select single value by row and column label.
 
-## Integer Indexes
+### Arithmetic and Data Alignment
+
+#### Flexible arithmetic methods
+
+Method | Description
+------ | -----------
+add, radd | Method for addition(+)
+sub, rsub | Method for substraction(-)
+div, rdiv | Method for division(/)
+floordiv, rfloordiv | Method for floor division(//)
+mul, rmul | Method for multiplication(*)
+pow, rpow | Method for exponentiation(**)
+
+### Function Application and Mapping
+
+- **apply**: method used to apply a function on one dimensional arrays to each column or row on a DataFrame.
+
+```python
+    In [51]: f = lambda x: x.max() - x.min()
+
+    In [52]: frame.apply(f) # We already have a 'frame' DataFrame
+    #...
+```
+
+👉🏼 Here the function f , which computes the difference between the maximum and minimum of a Series, is invoked once on each column in frame . The result is a Series having the columns of frame as its index.
+📍 If you pass axis='columns' to apply , the function will be invoked once per row instead.
+
+- **applymap**:  method _used to apply a function on each value of a DataFrame_. The reason for the name applymap is that Series has a **map** _method for applying an element-wise function_.
+
+### Sorting and Ranking
+
+- **sort_index**: method which returns a new sorted object.
+- With a DataFrame, you can sort by index on either axis by giving the argument: **axis**(0[default] or 1)
+- The data is _sorted in ascending order by default_, but _can be sorted in descending order with the argument_: **ascending=False**.
+
+- To sort a Series by its values, use **sort_values** method.
+📍 Any missing values are sorted to the end of the Series by default.
+
+- When _sorting a DataFrame, you can use the data in one or more columns as the sort keys. To do so, pass one or more column names to the by option of sort_values_.
+
+```python
+    In [53]: frame.sort_values(by='b')
+    # to sort by multiple columns
+    In [54]: frame.sort_values(by=['a', 'b'])
+```
+
+- **Ranking** assigns ranks from one through the number of valid data points in an array.
+- **rank**: method for Series and DataFrames, which by default rank breaks ties by assigning each group the mean rank.
+📍 Ranks can also be assigned according to the order in which they’re observed in the data:
+
+```python
+    In [55]: obj.rank(method='first')
+```
+
+- You can rank in descending order using argument: **ascending=False**.
+- DataFrame can compute ranks over the rows or the columns using argument: **axis='columns'** for column ranking.
+
+#### Tie-breaking method with rank
+
+Method | Description
+------ | -----------
+**'average'** | Default: assign the average rank to each entry in the equal group.
+**'min'** | Use the minimum rank for the whole group.
+**'max'** | Use the maximum rank for the whole group.
+**'first'** | Assign ranks in the order the values appear in the data.
+**'dense'** | Like method='min' , but ranks always increase by 1 in between groups rather than the number of equal elements in a group.
+
+### Axis Indexs with duplicates Labels
+
+- While many pandas functions (like **reindex** ) require that the labels be unique, it’s not mandatory.
+- **is_unique**: property that tell you whether its labels are unique or not.
+❗**Data selection** is one of the main things that behaves differently with duplicates. _Indexing a label with multiple entries returns a Series, while single entries return a scalar value_:
+
+```python
+    In [56]: obj['a']
+    Out [56]:
+    a   0
+    a   1
+    dtype: int64
+
+    In [57]: obj['c']
+    Out [57]: 4
+```
+
+📢 This can make your code more complicated, as the output type from indexing can vary based on whether a label is repeated or not. The same logic extends to indexing rows in a DataFrame.
+
+## Summarizing and COmputing Descriptive Statistics
