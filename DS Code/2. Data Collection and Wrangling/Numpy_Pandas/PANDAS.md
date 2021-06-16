@@ -289,3 +289,133 @@ Method | Description
 **unique** | Compute the array of unique values in the Index.
 
 ## Essential Functionality
+
+- This is a part to show the fundamentals mechanics of interacting with the data contained in a Series or DataFrame.
+
+### Reindexing
+
+- **reindex**: method to create a new object with the data conformed to a new index. Calling reindex on a Series rearranges the data according to the new index, _introducing missing values if any index were not already present_.
+
+```python
+    In [35]: obj = pd.Series([4.5, 7.2, -5.3, 3.6], index=['d', 'b', 'a', 'c'])
+
+    In [36]: obj
+    Out [36]:
+    d   4.5
+    b   7.2
+    a  -5.3
+    c   3.6
+    dtype: float64
+
+    In [37]: obj2 = obj.reindex(['a', 'b', 'c', 'd', 'e'])
+    
+    In [38]: obj2
+    Out [38]:
+    a   -5.3
+    b   7.2
+    c   3.6
+    d   4.5
+    e   NaN
+    dtype: float64
+```
+
+#### reindex function arguments
+
+Argument | Description
+---------| -----------
+**index** | New sequence to use as index. Can be Index instance or any other sequence-like Python data structure. An Index will be used exactly as is without any copying.
+**method** | Interpolation (fill) method; 'ffill' fills forward, while 'bfill' fills backward.
+**fill_value** | Substitute value to use when introducing missing data by reindexing.
+**limit** | When forward- or backfilling, maximum size gap (in number of elements) to fill.
+**tolerance** | When forward- or backfilling, maximum size gap (in absolute numeric distance) to fill for inexact matches.
+**level** | Match simple Index on level of MultiIndex; otherwise select subset of.
+**copy** | If True , always copy underlying data even if new index is equivalent to old index; if False , do not copy the data when the indexes are equivalent.
+
+### Dropping Entries from an Axis
+
+- **drop**: method to return a new object with the indicated _value or values_ deleted from an axis.
+
+```python
+    In [39]: obj = pd.Series(np.arange(5.), index=['a', 'b', 'c', 'd', 'e'])
+
+    In [40]: obj
+    Out [40]:
+    a   0.0
+    b   1.0
+    c   2.0
+    d   3.0
+    e   4.0
+    dtype: float64
+
+    In [41]: new_obj = obj.drop('c')
+
+    In [42]: new_obj
+    Out [43]:
+    a   0.0
+    b   1.0
+    d   3.0
+    e   4.0
+    dtype: float64
+
+    In [43]: obj.drop(['d', 'c'])
+    Out [44]:
+    a   0.0
+    b   1.0
+    e   4.0
+    dtype: float64
+```
+
+📍 With DataFrame, index values can be deleted from either axis.
+
+```python
+    In [45]: data.drop('two', axis=1)
+    # or
+    In [46]: data.drop(['two', 'four'], axis='columns')
+```
+
+- Many functions, like **drop** , which _modify the size or shape of a Series or DataFrame_, _can manipulate an object in-place without returning a new object_.
+
+```python
+    In [47]: obj.drop('c', inplace=True)
+```
+
+❗ Be careful with the **inplace**, as it destroys any data that is dropped.
+
+### Indexing, Selection, and Filtering
+
+#### Indexing
+
+- Series indexing ( obj[...] ) _works analogously to NumPy array indexing, except you can use the Series’s index values instead of only integers._
+- _Slicing with labels behaves differently than normal Python slicing_ in that the _end‐point is inclusive_.
+- **Setting** using these methods _modifies the corresponding section of the Series_.
+- **Indexing** into a DataFrame is for _retrieving one or more columns either with a single value or sequence_.
+
+#### Selection with loc and iloc
+
+- **loc** and **iloc** enable you to _select a subset of the rows and columns from a DataFrame with NumPy-like notation using either axis **labels** (loc) or **integers**(iloc)._ **They are used on the rows**.
+
+```python
+    In [48]: data.loc['Colorado', ['two', 'three']]
+    # Or
+    In [49]: data.iloc[2, [3, 0, 1]]
+    # Or
+    In [50]: data.iloc[2]
+```
+
+#### Indexing options with DataFrame
+
+Type | Notes
+---- | -----
+**df[val]** | Select single column or sequence of columns from the DataFrame; special case conveniences: boolean array (filter rows), slice (slice rows), or boolean DataFrame (set values based on some criterion).
+**df.loc[val]** | Selects single row or subset of rows from the DataFrame by label.
+**df.loc[:, val]** | Selects single column or subset of columns by label.
+**df.loc[val1, val2]** | Select both rows and columns by label.
+**df.iloc[where]** | Selects single row or subset of rows from the DataFrame by integer position.
+**df.iloc[:, where]** | Selects single column or subset of columns by integer position.
+**df.iloc[where_i, where_j]** | Select both rows and columns by integer position.
+**df.at[label_i, label_j]** | Select a single scalar value by row and column label.
+**df.iat[i, j]** | Select a single scalar value by row and column position (integers).
+**reindex method** | Select either rows or columns by labels.
+**get_value, set_value methods** | Select single value by row and column label.
+
+## Integer Indexes
