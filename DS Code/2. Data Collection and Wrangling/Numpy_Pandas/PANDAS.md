@@ -504,4 +504,58 @@ Method | Description
 
 📢 This can make your code more complicated, as the output type from indexing can vary based on whether a label is repeated or not. The same logic extends to indexing rows in a DataFrame.
 
-## Summarizing and COmputing Descriptive Statistics
+## Summarizing and Computing Descriptive Statistics
+
+### Descriptive and Summary statistics
+
+Method | Description
+------ | -----------
+**count** | Number of non-NA values.
+**describe** | Compute set of summary statistics for Series or each DataFrame column.
+**min, max** | Compute minimum and maximum values.
+**argmin, argmax** | Compute index locations (integers) at which minimum or maximum value obtained, respectively.
+**idxmin, idxmax** | Compute index labels at which minimum or maximum value obtained, respectively.
+**quantile** |Compute sample quantile ranging from 0 to 1.
+**sum** | Sum of values.
+**mean** |Mean of values.
+**median** | Arithmetic median (50% quantile) of values.
+**mad** | Mean absolute deviation from mean value.
+**prod** | Product of all values.
+**var** | Sample variance of values.
+**std** | Sample standard deviation of values.
+**skew** | Sample skewness (third moment) of values.
+**kurt** | Sample kurtosis (fourth moment) of values.
+**cumsum** | Cumulative sum of values.
+**cummin, cummax** | Cumulative minimum or maximum of values, respectively.
+**cumprod** | Cumulative product of values.
+**diff** | Compute first arithmetic difference (useful for time series).
+**pct_change** | Compute percent changes.
+
+### Options for reduction methods
+
+Method | Description
+-------| -----------
+**axis** | Axis to reduce over; 0 for DataFrame’s rows and 1 for columns.
+**skipna** | Axis to reduce over; 0 for DataFrame’s rows and 1 for columns.
+**level** | Reduce grouped by level if the axis is hierarchically indexed (MultiIndex).
+
+### Correlation and Covariance
+
+- **corr**: method of Series that computes the correlation of the overlapping, non-NA, aligned-by-index values in two Series.
+- **cov**: method to compute the covariance.
+- _DataFrame's corr and cov methods, return a full correlation or covariance matrix as a DataFrame respectively_.
+- Using DataFrame’s **corrwith** method, you _can compute pairwise correlations between a DataFrame’s columns or rows with another Series or DataFrame_. _Passing a Series returns a Series with the correlation value computed for each column_.
+- _Passing a DataFrame computes the correlations of matching column names_.
+- Passing **axis='columns'** does _things row-by-row_ instead. In all cases, the _data points are aligned by label before the correlation is computed_.
+
+### Unique Values, Values Counts, and Membership
+
+#### Unique, value counts, and set membership methods
+
+Method | Description
+------ | -----------
+**isin** | Compute boolean array indicating whether each Series value is contained in the passed sequence of
+values.
+**match** | Compute integer indices for each value in an array into another array of distinct values; helpful for data alignment and join-type operations.
+**unique** | Compute array of unique values in a Series, returned in the order observed.
+**value_counts** | Return a Series containing unique values as its index and frequencies as its values, ordered count in descending order.
